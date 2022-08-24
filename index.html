@@ -1,1 +1,26 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="description" content="human technology" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<title>Example Status Checker</title>
+<center>
+  <script>
+  function checkServerStatus()
+{
+    setServerStatus("unknown");
+    var img = document.body.appendChild(document.createElement("img"));
+    img.onload = function()
+    {
+        setServerStatus("online");
+    };
+    img.onerror = function()
+    {
+        setServerStatus("offline");
+    };
+    img.src = "http://myserver.com/ping.gif";
+}
+  </script>
+</center>
+</html>
