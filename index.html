@@ -6,6 +6,14 @@
 <style>
   body {
     text-align: center;
+    max-width: 600px;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  pre { 
+    text-align: left;
+    border: 1px solid black;
+    padding: 1em;
   }
 </style>
 </head>
@@ -62,5 +70,56 @@
   </script>
   <!-- Site Checker Embed - The End! -->
   
+  <h2>Embed Version</h2>
+  <pre>
+    &lt;!-- Site Checker Embed Starts Here! --&gt;
+    &lt;style&gt;
+      .dot {
+        height: 25px;
+        width: 25px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1em;
+      }
+    &lt;/style&gt;
+  
+    &lt;div id=&quot;siteChecker&quot;&gt;&lt;/div&gt;
+    
+    &lt;script&gt;
+      // Site Checker Logic - edit or add items to this list
+      var sitesWithImages = [
+        &quot;https://www.deliverlogic.com/favicon.ico&quot;,
+        &quot;https://www.deliverlogic.com/favicon.ico&quot;
+      ];
+    
+      function imageExists(image_url){
+        var http = new XMLHttpRequest();
+  
+        http.open('HEAD', image_url, false);
+        http.send();
+  
+        return http.status != 404;
+      }
+  
+      siteCheckerDiv = document.getElementById(&quot;siteChecker&quot;);
+  
+      for(var i = 0; i &lt; sitesWithImages.length; i++){
+        item = document.createElement(&quot;ul&quot;);
+        dot = document.createElement(&quot;span&quot;);
+        dot.classList.add(&quot;dot&quot;);
+        domain = new URL(sitesWithImages[i]);
+        item.innerText = domain.hostname;
+        item.appendChild(dot);
+        if(imageExists(sitesWithImages[i])){
+          dot.style.background = &quot;green&quot;;
+        }
+        siteCheckerDiv.appendChild(item);
+      }
+    &lt;/script&gt;
+    &lt;!-- Site Checker Embed - The End! --&gt;
+  </pre>
+
 </body>
 </html>
