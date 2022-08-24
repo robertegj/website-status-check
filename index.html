@@ -3,25 +3,64 @@
 <head>
 <meta name="description" content="human technology" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+  body {
+    text-align: center;
+  }
+</style>
 </head>
 <title>Example Status Checker</title>
-<center>
+<body>
+
+  <h1>Site Status Checker</h1>
+
+  <!-- Site Checker Embed Starts Here! -->
+  <style>
+    .dot {
+      height: 25px;
+      width: 25px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 1em;
+    }
+  </style>
+
+  <div id="siteChecker"></div>
+  
   <script>
-  function checkServerStatus()
-{
-    console.log("unknown");
-    var img = document.body.appendChild(document.createElement("img"));
-    img.onload = function()
-    {
-        console.log("online");
-    };
-    img.onerror = function()
-    {
-        console.log("offline");
-    };
-    img.src = "https://www.deliverlogic.com/favicon.ico";
-}
-    checkServerStatus();
+    // Site Checker Logic - edit or add items to this list
+    var sitesWithImages = [
+      "https://www.deliverlogic.com/favicon.ico",
+      "https://www.deliverlogic.com/favicon.ico"
+    ];
+  
+    function imageExists(image_url){
+      var http = new XMLHttpRequest();
+
+      http.open('HEAD', image_url, false);
+      http.send();
+
+      return http.status != 404;
+    }
+
+    siteCheckerDiv = document.getElementById("siteChecker");
+
+    for(var i = 0; i < sitesWithImages.length; i++){
+      item = document.createElement("ul");
+      dot = document.createElement("span");
+      dot.classList.add("dot");
+      domain = new URL(sitesWithImages[i]);
+      item.innerText = domain.hostname;
+      item.appendChild(dot);
+      if(imageExists(sitesWithImages[i])){
+        dot.style.background = "green";
+      }
+      siteCheckerDiv.appendChild(item);
+    }
   </script>
-</center>
+  <!-- Site Checker Embed - The End! -->
+  
+</body>
 </html>
